@@ -13,9 +13,12 @@
 				"6502",
 				"--config",
 				"${workspaceFolderBasename}/w65c02.cfg",
+				"-I",
+				"${workspaceFolderBasename}/src/",
 				"-o",
 				"${workspaceFolderBasename}/bin/out.bin",
 				"${workspaceFolderBasename}/src/Program.c",
+				"${workspaceFolderBasename}/src/w65c22.c",
 				"${workspaceFolderBasename}/src/crt0.s",
 				"${workspaceFolderBasename}/src/vectors.s",
 				"${workspaceFolderBasename}/src/interupt.s",
@@ -26,18 +29,6 @@
 				"isDefault": true
 			},
 			"detail": "compiler: cl65.exe"
-		},
-		{
-			"type": "process",
-			"label": "Cleanup",
-			"command": "",
-			"args": [
-			],
-			"group": {
-				"kind": "none",
-				"isDefault": false
-			},
-			"detail": "cleans up binaries"
 		}
 	]
 }

@@ -1,8 +1,8 @@
-#define STA(address, value) ((*(volatile unsigned char *) address) = (value))
+#include "w65c22.h"
 
-void main() {
-    STA(0x6003, 0b00011111);
-    STA(0x6001, 0b00011111);
+void main(void) {
+    setDDR(DDRA, 2, OUTPUT);
+    setPort(PORTA, 2, HIGH);
 
     while (1);
 }
