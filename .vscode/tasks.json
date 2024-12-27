@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "process",
+			"label": "Build",
+			"command": "C:/Program Files/cc65-snapshot-win64/bin/cl65.exe",
+			"args": [
+				"--verbose",
+				"--target",
+				"none",
+				"--cpu",
+				"6502",
+				"--config",
+				"${workspaceFolderBasename}/w65c02.cfg",
+				"-o",
+				"${workspaceFolderBasename}/bin/out.bin",
+				"${workspaceFolderBasename}/src/Program.c",
+				"${workspaceFolderBasename}/src/crt0.s",
+				"${workspaceFolderBasename}/src/vectors.s",
+				"${workspaceFolderBasename}/src/interupt.s",
+				"${workspaceFolderBasename}/src/wait.s"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: cl65.exe"
+		},
+		{
+			"type": "process",
+			"label": "Cleanup",
+			"command": "",
+			"args": [
+			],
+			"group": {
+				"kind": "none",
+				"isDefault": false
+			},
+			"detail": "cleans up binaries"
+		}
+	]
+}

@@ -7,6 +7,9 @@
 *.obj
 *.elf
 
+# Compiled Binary
+.bin
+
 # Linker output
 *.ilk
 *.map
