@@ -8,7 +8,7 @@
 *.elf
 
 # Compiled Binary
-.bin
+bin/
 
 # Linker output
 *.ilk
