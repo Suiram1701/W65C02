@@ -1,8 +1,21 @@
 #include "w65c22.h"
 
-void main(void) {
-    setDDR(DDRA, 2, OUTPUT);
-    setPort(PORTA, 2, HIGH);
+unsigned char led = 0;
 
-    while (1);
+void main(void) {
+    portMode(0, OUTPUT);
+    portMode(1, OUTPUT);
+    portMode(2, OUTPUT);
+    portMode(3, OUTPUT);
+    portMode(4, OUTPUT);
+
+    while (1) {
+        writePort(led, HIGH);
+        writePort(led, LOW);
+
+        led++;
+        if (led > 7) {
+            led = 0;
+        }
+    }
 }

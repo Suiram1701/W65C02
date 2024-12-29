@@ -15,6 +15,7 @@
 				"${workspaceFolderBasename}/w65c02.cfg",
 				"-I",
 				"${workspaceFolderBasename}/src/",
+				// "-S",
 				"-o",
 				"${workspaceFolderBasename}/bin/out.bin",
 				"${workspaceFolderBasename}/src/Program.c",
