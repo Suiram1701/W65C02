@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "CC65",
+            "includePath": [
+                "/sdk/cc65/include",
+                "${workspaceFolder}/W65C02/src/**"
+            ],
+            "intelliSenseMode": "${default}",
+            "defines": [
+                "__fastcall__=__fastcall"
+            ]
+        }
+    ],
+    "version": 4
+}

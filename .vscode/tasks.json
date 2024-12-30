@@ -3,33 +3,29 @@
 	"tasks": [
 		{
 			"type": "process",
-			"label": "Build",
-			"command": "C:/Program Files/cc65-snapshot-win64/bin/cl65.exe",
-			"args": [
-				"--verbose",
-				"--target",
-				"none",
-				"--cpu",
-				"6502",
-				"--config",
-				"${workspaceFolderBasename}/w65c02.cfg",
-				"-I",
-				"${workspaceFolderBasename}/src/",
-				// "-S",
-				"-o",
-				"${workspaceFolderBasename}/bin/out.bin",
-				"${workspaceFolderBasename}/src/Program.c",
-				"${workspaceFolderBasename}/src/w65c22.c",
-				"${workspaceFolderBasename}/src/crt0.s",
-				"${workspaceFolderBasename}/src/vectors.s",
-				"${workspaceFolderBasename}/src/interupt.s",
-				"${workspaceFolderBasename}/src/wait.s"
-			],
+			"label": "Compile",
+			"command": "make",
+			"options": {
+				"cwd": "${workspaceFolder}/W65C02/"
+			},
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
-			"detail": "compiler: cl65.exe"
+			"detail": "Compile using Make"
+		},
+		{
+			"type": "process",
+			"label": "Clean",
+			"command": "make",
+			"args": ["clean"],
+			"options": {
+				"cwd": "${workspaceFolder}/W65C02/"
+			},
+			"group": {
+				"kind": "none",
+				"isDefault": false
+			}
 		}
 	]
 }
