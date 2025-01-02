@@ -1,36 +1,15 @@
-#include <stdbool.h>
-#include <limits.h>
 #include "w65c22.h"
-
-unsigned int i = 0;
-bool ascending = true;
-unsigned short led = 0;
+#include "hd44780.h"
 
 void main(void) {
-    portMode(0, OUTPUT);
-    portMode(1, OUTPUT);
-    portMode(2, OUTPUT);
-    portMode(3, OUTPUT);
-    portMode(4, OUTPUT);
+    portModes(0xFFFF);
 
-    while (1) {
-        writePort(led, HIGH);
-        for (i = 0; i < USHRT_MAX / 2; i++) {
-        __asm__ ("nop");
-        }
-        writePort(led, LOW);
+    lcdFunctionSet(LCD_TWO_LINES | LCD_SMALL_FONT);
+    lcdDisplayControl(LCD_ON | LCD_CURSOR_OFF | LCD_BLINK_OFF);
+    lcdEntryModeSet(LCD_INCREMENT | LCD_ACCOMPANIES_SHIFT);
 
-        if (ascending == true) {
-            led++;
-            if (led >= 4) {
-                ascending = false;
-            }
-        }
-        else {
-            led--;
-            if (led == 0) {
-                ascending = true;
-            }
-        }
-    }
+    lcdClearDisplay();
+    lcdWriteString("Hello");
+    lcdSetCursor(1, 11);
+    lcdWriteString("World");
 }
