@@ -1,14 +1,15 @@
+#include <stdint.h>
 #include "w65c22.h"
 
-#define __W65C22_BASE  0x6000
-#define __W65C22_PORTB (__W65C22_BASE + 0x00)
-#define __W65C22_PORTA (__W65C22_BASE + 0x01)
-#define __W65C22_DDRB  (__W65C22_BASE + 0x02)
-#define __W65C22_DDRA  (__W65C22_BASE + 0x03)
+#define __W65C22       0x6000
+#define __W65C22_PORTB (__W65C22 + 0x00)
+#define __W65C22_PORTA (__W65C22 + 0x01)
+#define __W65C22_DDRB  (__W65C22 + 0x02)
+#define __W65C22_DDRA  (__W65C22 + 0x03)
 
-#define __Address(addr) (*(unsigned char*)addr)
+#define __Address(addr) (*(uint8_t*)addr)
 
-void __fastcall__ _modifyBit(unsigned short addr, unsigned char bit, unsigned char value) {
+void _modifyBit(uint16_t addr, uint8_t bit, uint8_t value) {
     if (bit > 7) return;
 
     if (value > 0) {
@@ -19,13 +20,13 @@ void __fastcall__ _modifyBit(unsigned short addr, unsigned char bit, unsigned ch
     }
 }
 
-signed char __fastcall__ _readBit(unsigned short addr, unsigned char bit) {
+int8_t _readBit(uint16_t addr, uint8_t bit) {
     if (bit > 7) return -1;     // Port out of range
 
     return (__Address(addr) >> bit) & 1;
 }
 
-void __fastcall__ portMode(unsigned char port, unsigned char mode) {
+void portMode(uint16_t port, uint8_t mode) {
     if (port > 15) return;     // Port out of range
     
     if (port <= 7) {
@@ -36,12 +37,12 @@ void __fastcall__ portMode(unsigned char port, unsigned char mode) {
     }
 }
 
-void __fastcall__ portModes(unsigned short ports) {
-    __Address(__W65C22_DDRA) = (unsigned char)(ports & 255);
-    __Address(__W65C22_DDRB) = (unsigned char)(ports >> 8);
+void portModes(uint16_t ports) {
+    __Address(__W65C22_DDRA) = (uint8_t)(ports & 255);
+    __Address(__W65C22_DDRB) = (uint8_t)(ports >> 8);
 }
 
-void __fastcall__ writePort(unsigned short port, unsigned char value) {
+void writePort(uint16_t port, uint8_t value) {
     if (port > 15) return;     // Port out of range
     
     if (port <= 7) {
@@ -52,12 +53,12 @@ void __fastcall__ writePort(unsigned short port, unsigned char value) {
     }
 }
 
-void __fastcall__ writePorts(unsigned short ports) {
-    __Address(__W65C22_PORTA) = (unsigned char)(ports & 255);
-    __Address(__W65C22_PORTB) = (unsigned char)(ports >> 8);
+void writePorts(uint16_t ports) {
+    __Address(__W65C22_PORTA) = (uint8_t)(ports & 255);
+    __Address(__W65C22_PORTB) = (uint8_t)(ports >> 8);
 }
 
-signed char __fastcall__ readPort(unsigned short port) {
+int8_t readPort(uint16_t port) {
     if (port > 15) return -1;
 
     if (port <= 7) {
@@ -68,6 +69,6 @@ signed char __fastcall__ readPort(unsigned short port) {
     }
 }
 
-unsigned short __fastcall__ readPorts(void) {
+uint16_t readPorts(void) {
     return (__Address(__W65C22_PORTB) << 8) + __Address(__W65C22_PORTA); 
 }
