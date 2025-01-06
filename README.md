@@ -15,5 +15,5 @@ My currently on the breadboard assembled W65C02 is a bit deviating from the sche
 |     Component     |  Address space  |
 | ----------------- | --------------- |
 | HM62256B (RAM)    | 0x0    - 0x3FFF |
-| W65C22 (VIA)      | 0x6000 - 0x6003 |
+| W65C22 (VIA)      | 0x6000 - 0x600F |
 | AT28C256 (EEPROM) | 0x8000 - 0xFFFF |
