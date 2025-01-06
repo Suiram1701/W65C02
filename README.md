@@ -5,7 +5,7 @@ In this project I'am experimenting with my W65C02 microprocessor and create libr
 ## Hardware
 
 The W65C02 is currently assembled in this way:
-<img width="1894" alt="6502" src="https://eater.net/schematics/6502-serial.png" />
+<img width="1894" alt="6502" src="https://eater.net/schematics/6502.png" />
 (image from [eater.net](https://eater.net/6502))
 
 My currently on the breadboard assembled W65C02 is a bit deviating from the schematic. Instead of buttons red leds are assembled on PA 0 to PA 4.
