@@ -5,9 +5,7 @@
 			"type": "process",
 			"label": "Compile",
 			"command": "make",
-			"options": {
-				"cwd": "${workspaceFolder}/W65C02/"
-			},
+			"args": ["all"],
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -19,13 +17,13 @@
 			"label": "Clean",
 			"command": "make",
 			"args": ["clean"],
-			"options": {
-				"cwd": "${workspaceFolder}/W65C02/"
-			},
 			"group": {
 				"kind": "none",
 				"isDefault": false
 			}
 		}
-	]
+	],
+	"options": {
+		"cwd": "${workspaceFolder}/W65C02"
+	}
 }

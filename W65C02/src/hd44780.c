@@ -4,20 +4,17 @@
 #include "hd44780.h"
 #include "w65c22.h"
 
-static uint16_t __lcdWait;     // If 8 bit would be used instead of 16 bit the time spent with the delay is not enough time for the LCD.
-static uint8_t __lcdChar;
-static uint8_t __lcdPort;
-
 static const uint8_t __lcdRowOffset[] = { 0x0, 0x40, 0x0 + 16, 0x40 + 16 };
 
 void __sendLcdData(HD44780* device, uint8_t data) {
-    SEI();
+    uint8_t i;     // Idk why but cc65 gives me a bunch of errors when I try to declare it directly before the loop
 
     writePort(device->rw, LOW);
     writePort(device->e, LOW);
 
-    for (__lcdPort = 0; __lcdPort <= 7; __lcdPort++) {
-        writePort(device->data[__lcdPort], (data >> __lcdPort) & 1);
+    SEI();
+    for (i = 0; i <= 7; i++) {
+        writePort(device->data[i], (data >> i) & 1);
     }
 
     writePort(device->e, HIGH);
@@ -52,8 +49,9 @@ void lcdDisplayShift(HD44780* device, uint8_t shiftFlags) {
 }
 
 void lcdFunctionSet(HD44780* device, uint8_t functionFlags) {
-    // A delay is required to give the LCD some time to initialize internally (see __lcdWait declaration for more specific)
-    for (__lcdWait = 0; __lcdWait < UINT8_MAX; __lcdWait++) {
+    // A delay is required to give the LCD some time to initialize internally
+    uint16_t i;     // If 8 bit would be used instead of 16 bit the time spent with the delay is not enough time for the LCD.
+    for (i = 0; i < UINT8_MAX; ++i) {
         __asm__ ("nop");
     }
 
@@ -74,7 +72,8 @@ void lcdWriteChar(HD44780* device, char character) {
 }
 
 void lcdWriteString(HD44780* device, char* value) {
-    for (__lcdChar = 0; value[__lcdChar] != '\0'; __lcdChar++) {
-        lcdWriteChar(device, value[__lcdChar]);
+    uint8_t i;
+    for (i = 0; value[i] != '\0'; i++) {
+        lcdWriteChar(device, value[i]);
     }
 }
